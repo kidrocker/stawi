@@ -108,7 +108,7 @@
       }
       #name_logo {
         font-size: 30px;
-        color: #1A1253;
+        color: #1a1253;
         margin-left: 20px;
       }
       .stawika {
@@ -146,43 +146,68 @@
             <p class="col-4" id="months">12 months</p>
           </div>
           <div class="row" id="numbers">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button class="digits" id="1">1</button>
+            <button class="digits" id="2">2</button>
+            <button class="digits" id="3">3</button>
           </div>
           <div class="row">
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
+            <button class="digits" id="4">4</button>
+            <button class="digits" id="5">5</button>
+            <button class="digits" id="6">6</button>
           </div>
           <div class="row">
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
+            <button class="digits" id="7">7</button>
+            <button class="digits" id="8">8</button>
+            <button class="digits" id="9">9</button>
           </div>
           <div class="row">
-            <button>C</button>
-            <button>0</button>
-            <button>
-              <img
-                src="file:///C:/Users/kiura/Documents/Calculator/images/delete_1.png"
-              />
+            <button class="digits" id="Clear">C</button class="digits" id="C">
+            <button class="digits" id="0">0</button>
+            <button class="digits" id="Delete">
+              <img src="/images/delete_1.png" />
             </button>
           </div>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-6  col-sm-12" id="info_area">
+        <div class="flat-card" style="font-size: 20px; overflow: hidden;">
+          <div class="row" style="margin-left: 10px; padding-top: 20px;">
+            <img class="logos" src="images/stawi.webp" />
+            <p id="name_logo">Stawi by KCB</p>
+          </div>
+
+          <div
+            class="row container justify-content-around"
+            style="background-color: #ed005a; margin-left: 10px;"
+          >
+            <p class="stawika">7.6% per annum</p>
+            <p class="stawika">Ksh 12,000</p>
+          </div>
+        </div>
         <div class="flat-card">
           <div class="row" style="margin-left: 10px; padding-top: 20px;">
             <img class="logos" src="images/stawika.webp" />
-            <p id="name_logo">Stawika by KCB</p>
+            <p id="name_logo">Bank Loan at 13%</p>
           </div>
 
           <div class="row justify-content-around">
             <p class="stawika">7.6% per annum</p>
             <p class="stawika">Ksh 12,000</p>
           </div>
+        </div>
+        <div class="flat-card">
+            <div class="row" style="margin-left: 10px; padding-top: 20px;">
+              <img class="logos" src="images/stawika.webp" />
+              <p id="name_logo">Bank Loan at 14%</p>
+            </div>
+
+            <div class="row justify-content-around">
+              <p class="stawika">7.6% per annum</p>
+              <p class="stawika">Ksh 12,000</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -202,5 +227,97 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+
+        let mont_slider = document.getElementById('myRange');
+        let months_text = document.getElementById('months');
+
+        mont_slider.oninput = function() {
+            let month = $('#myRange').val();
+            months_text.textContent = month + ' months.';
+        }
+
+        // $('input[type=range]').on('input', function () {
+        //     months.textContent = month + ' months';
+        // });
+
+        $('.digits').click(function() {
+            let id = this.id;
+            let currentInput = document.getElementById('loan_amount');
+            if(currentInput.textContent === '0') {
+                currentInput.textContent = '';
+            }
+
+            switch (id) {
+                case '1':
+                    currentInput.textContent+=id;
+                    break;
+                case '2':
+                    currentInput.textContent+=id;
+                    break;
+                case '3':
+                    currentInput.textContent+=id;
+                    break;
+                case '4':
+                    currentInput.textContent+=id;
+                    break;
+                case '5':
+                    currentInput.textContent+=id;
+                    break;
+                case '6':
+                    currentInput.textContent+=id;
+                    break;
+                case '7':
+                    currentInput.textContent+=id;
+                    break;
+                case '8':
+                    currentInput.textContent+=id;
+                    break;
+                case '9':
+                    currentInput.textContent+=id;
+                    break;
+                case '0':
+                    if(currentInput.textContent !== '0'){
+                        currentInput.textContent+=id;
+                        break;
+                    }
+                case 'Delete':
+                    if(currentInput.textContent == '0'){
+                        break;
+                    } else {
+                    currentInput.textContent=currentInput.textContent.slice(0,-1);
+                    break;
+                }
+                case 'Clear':
+                    currentInput.textContent='0';
+                    break;
+            }
+
+
+            let amount = parseInt(currentInput.textContent);
+
+            if (amount>=30000 && amount <= 250000){
+                $('#loan_amount').css('color', 'white');
+                // computeInterest(amount, months, interest_rate);
+                let months = parseInt($('#myRange').val());
+                console.log(computeInterest(amount, months, 9));
+
+            } else {
+                $('#loan_amount').css('color', 'red');
+            }
+
+        });
+
+        const computeInterest = (principal, months, rate) => {
+            let interest = parseFloat(principal * parseInt(months/12)*parseFloat(rate/100))
+            return {
+                interest: interest,
+                principal_and_interest: parseFloat(interest + principal)
+            }
+        }
+
+
+    </script>
   </body>
 </html>
