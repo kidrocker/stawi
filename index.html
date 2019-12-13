@@ -179,34 +179,42 @@
 
           <div
             class="row container justify-content-around"
-            style="background-color: #ed005a; margin-left: 10px;"
           >
-            <p class="stawika">7.6% per annum</p>
-            <p class="stawika">Ksh 12,000</p>
-          </div>
-        </div>
-        <div class="flat-card">
-          <div class="row" style="margin-left: 10px; padding-top: 20px;">
-            <img class="logos" src="images/stawika.webp" />
-            <p id="name_logo">Bank Loan at 13%</p>
+            <p class="stawika">Principal: <span id="principal-des"> KSH 10,000 </span></p>
+            <p class="stawika">Repayment period: <span id="repayment-period"> 1 </span> month.</p>
+            <p class="stawika">Total fees: KSH<span id="total-fees"> 290 </span> month.</p>
+            <p class="stawika">Interest: KSH<span id="interest"> 1 </span> month.</p>
+            <p class="stawika">Repayment Amount: KSH <span id="repayment-amount"> 10,380 </span> month.</p>
+
           </div>
 
-          <div class="row justify-content-around">
-            <p class="stawika">7.6% per annum</p>
-            <p class="stawika">Ksh 12,000</p>
-          </div>
         </div>
-        <div class="flat-card">
-            <div class="row" style="margin-left: 10px; padding-top: 20px;">
-              <img class="logos" src="images/stawika.webp" />
-              <p id="name_logo">Bank Loan at 14%</p>
-            </div>
 
-            <div class="row justify-content-around">
-              <p class="stawika">7.6% per annum</p>
-              <p class="stawika">Ksh 12,000</p>
-            </div>
-          </div>
+        <div class="flat-card">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Provider</th>
+                    <th scope="col">Interest Charged</th>
+                    <th scope="col">Stawi Savings</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bank loan at 13%</td>
+                    <td class="principal">12,000</td>
+                    <td class="stawi_savings">1,000</td>
+                </tr>
+                <tr>
+                    <td>Bank loan at 14%</td>
+                    <td class="principal">12,000</td>
+                    <td class="stawi_savings">1,000</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
 
         </div>
       </div>
@@ -233,14 +241,26 @@
         let mont_slider = document.getElementById('myRange');
         let months_text = document.getElementById('months');
 
+        let principal_des = document.getElementById('principal-des');
+        let repayment_period = document.getElementById('repayment-period');
+        let total_fees = document.getElementById('total-fees');
+        let interest = document.getElementById('interest');
+        let repayment_amount = document.getElementById('repayment-amount');
+
+        let principal = document.querySelectorAll('.principal');
+        for (let i=0; i<principal.length; i++){
+            principal[i].innerText = 120000;
+        }
+
+        let stawi_savings = document.querySelectorAll('.stawi_savings');
+        for (let i=0; i<stawi_savings.length; i++){
+            stawi_savings[i].innerText = 120000;
+        }
+
         mont_slider.oninput = function() {
             let month = $('#myRange').val();
             months_text.textContent = month + ' months.';
         }
-
-        // $('input[type=range]').on('input', function () {
-        //     months.textContent = month + ' months';
-        // });
 
         $('.digits').click(function() {
             let id = this.id;
@@ -301,6 +321,8 @@
                 $('#loan_amount').css('color', 'white');
                 // computeInterest(amount, months, interest_rate);
                 let months = parseInt($('#myRange').val());
+                principal_des.innerText = 'Principal: KSH ' + amount;
+
                 console.log(computeInterest(amount, months, 9));
 
             } else {
