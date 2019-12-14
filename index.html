@@ -128,9 +128,10 @@
 
     <div class="row justify-content-around">
       <div class="col-md-6 col-lg-5 col-sm-12">
-        <div class="container" id="num_pad">
-          <div id="input_area">
-            <p id="loan_amount">0</p>
+
+        <div class="card mt-3">
+          <div class="card-header" id="input_area">
+             <span id="loan_amount">0</span>
           </div>
           <div class="row">
             <div class="slidecontainer col-8">
@@ -145,29 +146,35 @@
             </div>
             <p class="col-4" id="months">1 month.</p>
           </div>
-          <div class="row" id="numbers">
-            <button class="digits" id="1">1</button>
-            <button class="digits" id="2">2</button>
-            <button class="digits" id="3">3</button>
+
+          <div class="card-body container-fluid">
+            <div class="row">
+              <button class="digits" id="1">1</button>
+              <button class="digits" id="2">2</button>
+              <button class="digits" id="3">3</button>
+            </div>
+            <div class="row">
+              <button class="digits" id="4">4</button>
+              <button class="digits" id="5">5</button>
+              <button class="digits" id="6">6</button>
+            </div>
+            <div class="row">
+              <button class="digits" id="7">7</button>
+              <button class="digits" id="8">8</button>
+              <button class="digits" id="9">9</button>
+            </div>
+            <div class="row">
+              <button class="digits" id="Clear">C</button class="digits" id="C">
+              <button class="digits" id="0">0</button>
+              <button class="digits" id="Delete">
+                <img src="/images/delete_1.png" />
+              </button>
+            </div>
+
           </div>
-          <div class="row">
-            <button class="digits" id="4">4</button>
-            <button class="digits" id="5">5</button>
-            <button class="digits" id="6">6</button>
-          </div>
-          <div class="row">
-            <button class="digits" id="7">7</button>
-            <button class="digits" id="8">8</button>
-            <button class="digits" id="9">9</button>
-          </div>
-          <div class="row">
-            <button class="digits" id="Clear">C</button class="digits" id="C">
-            <button class="digits" id="0">0</button>
-            <button class="digits" id="Delete">
-              <img src="/images/delete_1.png" />
-            </button>
-          </div>
+
         </div>
+
       </div>
 
       <div class="col-md-6 col-lg-6  col-sm-12" id="info_area">
@@ -350,10 +357,14 @@
                     result_14: computeInterest(amount, months, 14),
                 }
 
-                interest_13.innerText = results.result_13.interest;
-                interest_14.innerText = results.result_14.interest;
-                stawi_savings_13.innerText = parseFloat(results.result_13.interest) - parseFloat(fees + result.interest);
-                stawi_savings_14.innerText = parseFloat(results.result_14.interest) - parseFloat(fees + result.interest);
+                interest_13.innerText = parseFloat(results.result_13.interest).toFixed(2);
+                interest_14.innerText = parseFloat(results.result_14.interest).toFixed(2);
+                stawi_savings_13.innerText = parseFloat(flastLoanCost(amount, 14, months)-  result.interest).toFixed(2);
+                stawi_savings_14.innerText = parseFloat(flastLoanCost(amount, 13, months) - result.interest).toFixed(2);
+
+                console.table(result);
+
+                console.log(flastLoanCost(amount, 13, months));
 
 
             } else {
@@ -372,6 +383,11 @@
                 excise_duty: +(0.10*(0.02*0.007*principal)).toFixed(2)
             }
         }
+
+        const flastLoanCost = (principal, rate, months) => {
+          return parseFloat(principal*=(rate/100)*(months/12));
+        }
+
 
 
     </script>
