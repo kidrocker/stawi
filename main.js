@@ -15,16 +15,16 @@ let interest_14 = document.getElementById("interest_14");
 
 let stawi_savings_13 = document.getElementById("stawi_savings_13");
 let stawi_savings_14 = document.getElementById("stawi_savings_14");
+var months = parseInt($("#myRange").val());
 
 months_slider.oninput = function() {
-  let month = $("#myRange").val();
-  if (parseInt(month) > 1) {
-    console.log(month);
-    months_text.textContent = month + " months.";
+  months = $("#myRange").val();
+  if (parseInt(months) > 1) {
+    months_text.textContent = months + " months.";
   } else {
-    months_text.textContent = month + " month.";
+    months_text.textContent = months + " month.";
   }
-  repayment_period.textContent = month;
+  repayment_period.textContent = months;
 };
 
 $(".digits").click(function() {
@@ -84,12 +84,12 @@ $(".digits").click(function() {
   if (amount >= 30000 && amount <= 250000) {
     $("#loan_amount").css("color", "white");
     // computeInterest(principal, period, rate=9);
-    let months = parseInt($("#myRange").val());
+
     principal_des.innerText = "Principal: KSH " + numberWithCommas(amount);
 
     // results object, default rate is 9%
     let result = computeInterest(amount, months);
-    total_fees.innerText = numberWithCommas(result.total_fees);
+    total_fees.innerText = numberWithCommas((result.total_fees));
     interest.innerText = numberWithCommas(result.interest);
     repayment_amount.innerText = numberWithCommas(
       result.principal_and_interest
@@ -100,13 +100,15 @@ $(".digits").click(function() {
       result_14: computeInterest(amount, months, (rate = 14))
     };
 
-    interest_13.innerText = (results.result_13.interest).toFixed(2);
-    interest_14.innerText = (results.result_14.interest).toFixed(2);
+    interest_13.innerText = results.result_13.interest.toFixed(2);
+    interest_14.innerText = results.result_14.interest.toFixed(2);
 
-    stawi_savings_13.innerText =
-      (results.result_13.total_fees - result.total_fees).toFixed(2);
-    stawi_savings_14.innerText =
-      (results.result_14.total_fees - result.total_fees).toFixed(2);
+    stawi_savings_13.innerText = (
+      results.result_13.total_fees - result.total_fees
+    ).toFixed(2);
+    stawi_savings_14.innerText = (
+      results.result_14.total_fees - result.total_fees
+    ).toFixed(2);
   } else {
     $("#loan_amount").css("color", "red");
   }
@@ -133,3 +135,5 @@ const computeInterest = (
   console.table(result);
   return result;
 };
+
+updater();
