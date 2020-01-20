@@ -82,7 +82,7 @@ $("#inputs").on("click change", function(e) {
     $("#loan_amount").css("color", "white");
     // computeInterest(principal, period, rate=9);
 
-    principal_des.innerText = "Principal: KSH " + numberWithCommas(amount);
+    principal_des.innerText = "KSH " + numberWithCommas(amount);
 
     // results object, default rate is 9%
     let result = computeInterest(amount, months);
@@ -119,7 +119,7 @@ const computeInterest = (
   loan_value,
   period,
   rate = 9,
-  facility_fee_rate = 0.02,
+  facility_fee_rate = 0.04,
   credit_life_rate = 0.007
 ) => {
   let interest = Number(loan_value * (rate / 100) * (period / 12));
