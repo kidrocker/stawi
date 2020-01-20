@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
       rel="stylesheet"
@@ -14,118 +15,10 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="styles.css">
     <title>Stawika Loans</title>
   </head>
   <body>
-    <style>
-      body {
-        background-color: white;
-      }
-      button {
-        border-radius: 50%;
-        width: 100px;
-        height: 100px;
-        font-size: 25px;
-        margin: 2px;
-        cursor: pointer;
-        background-color: #ed005a;
-        border: none;
-        color: white;
-      }
-      button:hover {
-        background-color: #1a1253;
-      }
-
-      #num_pad {
-        margin-top: 5%;
-        background-color: #0c0c14;
-      }
-      #info_area {
-        margin-top: 1.1%;
-        background-color: rgb(207, 207, 207);
-      }
-      #numbers {
-        margin-top: 30px;
-      }
-      #months {
-        color: rgb(250, 114, 2);
-        margin-top: 18px;
-      }
-
-      #input_area {
-        width: 100%;
-        height: 90px;
-        background-color: rgb(23, 23, 32);
-      }
-
-      #loan_amount {
-        color: rgb(250, 250, 250);
-        background-color: rgb(23, 23, 32);
-        border: none;
-        font-size: 50px;
-        overflow: hidden;
-        margin-left: 10px;
-        margin-top: 10px;
-      }
-
-      .slidecontainer {
-        width: 100%;
-      }
-
-      .slider {
-        -webkit-appearance: none;
-        height: 10px;
-        width: 100%;
-        margin-top: 20px;
-        background: rgb(250, 114, 2);
-        outline: none;
-        -webkit-transition: 0.2s;
-        transition: opacity 0.2s;
-      }
-
-      .slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: #4caf50;
-        cursor: pointer;
-      }
-
-      .slider::-moz-range-thumb {
-        width: 25px;
-        height: 25px;
-        background: #4caf50;
-        cursor: pointer;
-      }
-
-      .slider::-moz-range-thumb {
-        width: 25px;
-        height: 25px;
-        background: #4caf50;
-        cursor: pointer;
-      }
-      #name_logo {
-        font-size: 30px;
-        color: #1a1253;
-        margin-left: 20px;
-      }
-      .stawika {
-        font-size: 18px;
-        font-family: "OpenSans-Regular";
-        color: #000000;
-      }
-      .logos {
-        width: 50px;
-        height: 50px;
-      }
-      .flat-card {
-        background-color: white;
-        margin-top: 10px;
-      }
-    </style>
-
     <div class="row justify-content-around">
       <div class="col-md-6 col-lg-5 col-sm-12">
 
@@ -254,141 +147,7 @@
       crossorigin="anonymous"
     ></script>
 
-    <script>
-
-        let mont_slider = document.getElementById('myRange');
-        let months_text = document.getElementById('months');
-
-        let principal_des = document.getElementById('principal-des');
-        let repayment_period = document.getElementById('repayment-period');
-        let total_fees = document.getElementById('total-fees');
-        let interest = document.getElementById('interest');
-        let repayment_amount = document.getElementById('repayment-amount');
-
-        let interest_13 = document.getElementById('interest_13');
-        let interest_14 = document.getElementById('interest_14');
-
-        let stawi_savings_13 = document.getElementById('stawi_savings_13');
-        let stawi_savings_14 = document.getElementById('stawi_savings_14');
-
-        const compute_stawi_savings = (rate) => {
-            let stawing_interest_and_charges = '';
-        }
-
-        mont_slider.oninput = function() {
-            let month = $('#myRange').val();
-            months_text.textContent = month + ' months.';
-            repayment_period.textContent = month;
-        }
-
-        $('.digits').click(function() {
-            let id = this.id;
-            let currentInput = document.getElementById('loan_amount');
-            if(currentInput.textContent === '0') {
-                currentInput.textContent = '';
-            }
-
-            switch (id) {
-                case '1':
-                    currentInput.textContent+=id;
-                    break;
-                case '2':
-                    currentInput.textContent+=id;
-                    break;
-                case '3':
-                    currentInput.textContent+=id;
-                    break;
-                case '4':
-                    currentInput.textContent+=id;
-                    break;
-                case '5':
-                    currentInput.textContent+=id;
-                    break;
-                case '6':
-                    currentInput.textContent+=id;
-                    break;
-                case '7':
-                    currentInput.textContent+=id;
-                    break;
-                case '8':
-                    currentInput.textContent+=id;
-                    break;
-                case '9':
-                    currentInput.textContent+=id;
-                    break;
-                case '0':
-                    if(currentInput.textContent !== '0'){
-                        currentInput.textContent+=id;
-                        break;
-                    }
-                case 'Delete':
-                    if(currentInput.textContent == '0'){
-                        break;
-                    } else {
-                    currentInput.textContent=currentInput.textContent.slice(0,-1);
-                    break;
-                }
-                case 'Clear':
-                    currentInput.textContent='0';
-                    break;
-            }
-
-
-            let amount = parseInt(currentInput.textContent);
-
-            if (amount>=30000 && amount <= 250000){
-                $('#loan_amount').css('color', 'white');
-                // computeInterest(principal, period, interest_rate);
-                let months = parseInt($('#myRange').val());
-                principal_des.innerText = 'Principal: KSH ' + amount;
-
-                let result = computeInterest(amount, months, 9);
-                let fees = result.facility_fee + result.credit_life + result.excise_duty;
-                total_fees.innerText = fees;
-
-                interest.innerText = result.interest;
-
-                repayment_amount.innerText = result.principal_and_interest + fees;
-
-                console.table(result)
-
-                let results = {
-                    result_13: computeInterest(amount, months, 13),
-                    result_14: computeInterest(amount, months, 14),
-                }
-
-                interest_13.innerText = parseFloat(results.result_13.interest).toFixed(2);
-                interest_14.innerText = parseFloat(results.result_14.interest).toFixed(2);
-                stawi_savings_13.innerText = parseFloat(flastLoanCost(amount, 14, months)-  result.interest).toFixed(2);
-                stawi_savings_14.innerText = parseFloat(flastLoanCost(amount, 13, months) - result.interest).toFixed(2);
-
-                console.table(result);
-
-                console.log(flastLoanCost(amount, 13, months));
-
-
-            } else {
-                $('#loan_amount').css('color', 'red');
-            }
-
-        });
-
-        const computeInterest = (principal, months, rate) => {
-            let interest = principal * (rate/100) * (months / 12);
-            return {
-                interest: interest,
-                principal_and_interest: parseFloat(interest + principal),
-                facility_fee: 0.02*principal,
-                credit_life: 0.007*principal,
-                excise_duty: +(0.10*(0.02*0.007*principal)).toFixed(2)
-            }
-        }
-
-        const flastLoanCost = (principal, rate, months) => {
-          return parseFloat(principal*=(rate/100)*(months/12));
-        }
-
-
+    <script src="main.js">
 
     </script>
   </body>
