@@ -15,20 +15,17 @@ let interest_14 = document.getElementById("interest_14");
 
 let stawi_savings_13 = document.getElementById("stawi_savings_13");
 let stawi_savings_14 = document.getElementById("stawi_savings_14");
-var months = parseInt($("#myRange").val());
 
-months_slider.oninput = function() {
-  months = $("#myRange").val();
+$("#inputs").on("click change", function(e) {
+  let months = document.getElementById("myRange").value;
   if (parseInt(months) > 1) {
     months_text.textContent = months + " months.";
   } else {
     months_text.textContent = months + " month.";
   }
   repayment_period.textContent = months;
-};
 
-$(".digits").click(function() {
-  let id = this.id;
+  let id = e.target.id;
   let currentInput = document.getElementById("loan_amount");
   if (currentInput.textContent === "0") {
     currentInput.textContent = "";
@@ -89,10 +86,14 @@ $(".digits").click(function() {
 
     // results object, default rate is 9%
     let result = computeInterest(amount, months);
-    total_fees.innerText = numberWithCommas((result.total_fees));
-    interest.innerText = numberWithCommas(result.interest);
+    total_fees.innerText = numberWithCommas(
+      parseFloat(result.total_fees).toFixed(2)
+    );
+    interest.innerText = numberWithCommas(
+      parseFloat(result.interest).toFixed(2)
+    );
     repayment_amount.innerText = numberWithCommas(
-      result.principal_and_interest
+      parseFloat(result.principal_and_interest).toFixed(2)
     );
 
     let results = {
@@ -135,5 +136,3 @@ const computeInterest = (
   console.table(result);
   return result;
 };
-
-updater();
