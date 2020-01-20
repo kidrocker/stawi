@@ -15,21 +15,15 @@ let interest_14 = document.getElementById("interest_14");
 
 let stawi_savings_13 = document.getElementById("stawi_savings_13");
 let stawi_savings_14 = document.getElementById("stawi_savings_14");
-var months = parseInt($("#myRange").val());
+let currentInput = document.getElementById("loan_amount");
+let months = parseInt($("#myRange").val());
 
 months_slider.oninput = function() {
-  months = $("#myRange").val();
-  if (parseInt(months) > 1) {
-    months_text.textContent = months + " months.";
-  } else {
-    months_text.textContent = months + " month.";
-  }
-  repayment_period.textContent = months;
+    months = $("#myRange").val();
 };
 
 $(".digits").click(function() {
   let id = this.id;
-  let currentInput = document.getElementById("loan_amount");
   if (currentInput.textContent === "0") {
     currentInput.textContent = "";
   }
@@ -79,20 +73,25 @@ $(".digits").click(function() {
       break;
   }
 
-  let amount = parseFloat(currentInput.textContent).toFixed(2);
+  amount = parseFloat(currentInput.textContent).toFixed(2);
+});
+
+const data = (amount, months) => {
 
   if (amount >= 30000 && amount <= 250000) {
     $("#loan_amount").css("color", "white");
     // computeInterest(principal, period, rate=9);
 
-    principal_des.innerText = "Principal: KSH " + numberWithCommas(amount);
+    principal_des.innerText = "KSH " + numberWithCommas(amount);
 
     // results object, default rate is 9%
     let result = computeInterest(amount, months);
-    total_fees.innerText = numberWithCommas((result.total_fees));
-    interest.innerText = numberWithCommas(result.interest);
+    total_fees.innerText = numberWithCommas(result.total_fees);
+    interest.innerText = numberWithCommas(
+      parseFloat(result.interest).toFixed(2)
+    );
     repayment_amount.innerText = numberWithCommas(
-      result.principal_and_interest
+      parseFloat(result.principal_and_interest).toFixed(2)
     );
 
     let results = {
@@ -112,15 +111,15 @@ $(".digits").click(function() {
   } else {
     $("#loan_amount").css("color", "red");
   }
-});
+};
 
-const computeInterest = (
-  loan_value,
-  period,
-  rate = 9,
-  facility_fee_rate = 0.02,
-  credit_life_rate = 0.007
-) => {
+const computeInterest = () => {
+    if (amount >= 30000 && amount <= 250000) {
+        $("#loan_amount").css("color", "white");
+
+  let loan_value = $("loan_value").textContent;
+  let period = $("#myRange").val();
+
   let interest = Number(loan_value * (rate / 100) * (period / 12));
   let result = {
     interest,
@@ -136,4 +135,4 @@ const computeInterest = (
   return result;
 };
 
-updater();
+data();
