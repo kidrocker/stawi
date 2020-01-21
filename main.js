@@ -78,7 +78,7 @@ $("#inputs").on("click change", function(e) {
 
   let amount = parseFloat(currentInput.textContent).toFixed(2);
 
-  if (amount >= 30000 && amount <= 250000) {
+  if (amount >= 50000 && amount <= 250000) {
     $("#loan_amount").css("color", "white");
     // computeInterest(principal, period, rate=9);
 
@@ -130,7 +130,7 @@ const computeInterest = (
     credit_life: credit_life_rate * Number(loan_value)
   };
   result.total_fees = Number(
-    result.credit_life + result.facility_fee + result.interest
+    result.credit_life + result.facility_fee
   );
   console.log("result object table");
   console.table(result);
